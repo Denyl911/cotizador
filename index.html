@@ -108,70 +108,95 @@
         var esquema = document.getElementById("esquema").value
         var banco = document.getElementById("banco").value
         var nombre = document.getElementById("nombre").value
-        var intereses = 0
+        var interesAnual = 0
         var cat = 0
         var cpa = 0
         var im = 0
-        var mensualidad = 20000
+        var mensualidad = 0
+
         switch (banco) {
             case "hsbc":
                 cat = 10.5
                 im = 30105
                 cpa = 18000
-                intereses = 8.9
-                mensualidad = 20000
+                interesAnual = 8.9
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
             case "scotiabank":
                 cat = 11.7
                 im = 35469
                 cpa = 22500
-                intereses = 9.95
-                mensualidad = 20000
+                interesAnual = 9.95
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
             case "santander":
                 cat = 11.8
                 im = 48478
                 cpa = 18000
-                intereses = 9.59
-                mensualidad = 20000
+                interesAnual = 9.59
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
             case "banregio":
                 cat = 12.6
                 im = 41805
                 cpa = 27000
-                intereses = 10.1
-                mensualidad = 20000
+                interesAnual = 10.1
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
             case "banorte":
                 cat = 11.3
                 im = 39710
                 cpa = 18000
-                intereses = 9
-                mensualidad = 20000
+                interesAnual = 9
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
             case "bx":
                 cat = 11.4
                 im = 50085
                 cpa = 27000
-                intereses = 9.9
-                mensualidad = 20000
+                interesAnual = 9.9
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
             case "banamex":
                 cat = 11.6
                 im = 48874
                 cpa = 0
-                intereses = 9
-                mensualidad = 20000
+                interesAnual = 9
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
             case "afirme":
                 cat = 11.6
                 im = 30105
                 cpa = 0
-                intereses = 9.9
-                mensualidad = 20000
+                interesAnual = 9.9
+                intereses = interesAnual/100/12
+                var factor = Math.pow(1+intereses,-plazo*12) 
+                mensualidad = importe*(intereses/(1-factor))
+                mensualidad = mensualidad.toFixed(2)
                 break
         }
-        ct.innerHTML = `<div class="mx-3 my-3"><div class="text-center mb-3"><h3>${nombre} esta es la mejor cotización para ti</h3></div><table class="table table-striped"><thead class="thead-light"><tr><th scope="col">Producto</th><th scope="col">Pago Fijo</th></tr></thead><tbody><tr><th scope="row">Valor de vivienda</th><td>$${valor}</td></tr><tr><th scope="row">Importe del crédito</th><td>$${importe}</td></tr><tr><th scope="row">Plazo del crédito</th><td>${plazo} años</td></tr><tr><th scope="row">Tasa de Interés</th><td>${intereses}%</td></tr><tr><th scope="row">Comisión por apertura</th><td>$${cpa}</td></tr><tr><th scope="row">Mensualidad</th><td>$${mensualidad}</td></tr><tr><th scope="row">CAT*</th><td>${cat}%</td></tr><tr><th scope="row">Ingresos mínimos</th><td>$${im}</td></tr></tbody></table><p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p></div>`
+        ct.innerHTML = `<div class="mx-3 my-3"><div class="text-center mb-3"><h3>${nombre} esta es la mejor cotización para ti</h3></div><table class="table table-striped"><thead class="thead-light"><tr><th scope="col">Producto</th><th scope="col">Pago Fijo</th></tr></thead><tbody><tr><th scope="row">Valor de vivienda</th><td>$${valor}</td></tr><tr><th scope="row">Importe del crédito</th><td>$${importe}</td></tr><tr><th scope="row">Plazo del crédito</th><td>${plazo} años</td></tr><tr><th scope="row">Tasa de Interés</th><td>${interesAnual}%</td></tr><tr><th scope="row">Comisión por apertura</th><td>$${cpa}</td></tr><tr><th scope="row">Mensualidad</th><td>$${mensualidad}</td></tr><tr><th scope="row">CAT*</th><td>${cat}%</td></tr><tr><th scope="row">Ingresos mínimos</th><td>$${im}</td></tr></tbody></table><p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p></div>`
         var opt = {
             margin: 1,
             image: { type: 'jpeg', quality: 0.98 },
@@ -185,7 +210,5 @@
         })
     })
 
-
 </script>
-
 </html>

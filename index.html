@@ -47,7 +47,8 @@
             padding-right: 12%;
             width: 120%;
             margin-left: -10%;
-            margin-bottom: 10%;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
 
         .my-fotter {
@@ -55,19 +56,20 @@
             color: #ffffff;
             background-color: #1b5a4a;
             padding-top: 15px;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
             width: 120%;
             margin-left: -10%;
             min-height: 180px;
+            margin-bottom: 15px;
         }
 
         .logo {
-            width: 150px;
+            width: 200px;
             height: auto;
         }
 
         .logo-alt {
-            width: 100px;
+            width: 150px;
             height: auto;
         }
 
@@ -75,11 +77,6 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-        }
-
-        .my-foot {
-            margin-top: 7%;
-            margin-bottom: 7%;
         }
 
         .social-icon {
@@ -118,9 +115,8 @@
                     <option value="scotiabank">Scotiabank</option>
                     <option value="santander">Santander</option>
                     <option value="banregio">Banregio</option>
-                    <option value="banorte1">Banorte</option>
+                    <option value="banorte">Banorte</option>
                     <option value="bx">BX+</option>
-                    <option value="banorte2">Banorte</option>
                     <option value="banamex">Banamex</option>
                     <option value="afirme">Afirme</option>
                 </select>
@@ -154,6 +150,8 @@
             </div>
         </div>
     </div>
+
+
 </body>
 <script>
     document.getElementById("nextBtn").addEventListener("click", () => {
@@ -184,11 +182,19 @@
             var esquema = document.getElementById("esquema").value
             var banco = document.getElementById("banco").value
             var nombre = document.getElementById("nombre").value
+            var intereses = 0
             var interesAnual = 0
             var cat = 0
             var cpa = 0
             var im = 0
             var mensualidad = 0
+            var double = false
+            var intereses2 = 0
+            var interesAnual2 = 0
+            var cat2 = 0
+            var cpa2 = 0
+            var im2 = 0
+            var mensualidad2 = 0
 
             switch (banco) {
                 case "hsbc":
@@ -231,7 +237,8 @@
                     mensualidad = importe * (intereses / (1 - factor))
                     mensualidad = mensualidad.toFixed(2)
                     break
-                case "banorte1":
+                case "banorte":
+                    double = true
                     cat = 11.3
                     im = 39710
                     cpa = 18000
@@ -240,16 +247,14 @@
                     var factor = Math.pow(1 + intereses, -plazo * 12)
                     mensualidad = importe * (intereses / (1 - factor))
                     mensualidad = mensualidad.toFixed(2)
-                    break
-                case "banorte2":
-                    cat = 10.2
-                    im = 37602
-                    cpa = 18000
-                    interesAnual = 8
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
+                    cat2 = 10.2
+                    im2 = 37602
+                    cpa2 = 18000
+                    interesAnual2 = 8
+                    intereses2 = interesAnual2 / 100 / 12
+                    var factor2 = Math.pow(1 + intereses2, -plazo * 12)
+                    mensualidad2 = importe * (intereses2 / (1 - factor2))
+                    mensualidad2 = mensualidad2.toFixed(2)
                     break
                 case "bx":
                     cat = 11.4
@@ -287,9 +292,22 @@
                 margin: 1,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 1 },
-                jsPDF: { format: 'letter', orientation: 'p' }
+                jsPDF: { format: 'a4', orientation: 'p' }
             };
-            ct.innerHTML = `<div><div class="my-nav"><img src="assets/logo.png" alt="Logo" class="logo">            <p>Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>        </div>        <div class="text-center my-5" style="color:#000000;">            <h4 style="text-transform:uppercase;">${nombre} esta es la mejor cotización para ti</h4>        </div>        <table class="table table-striped table-bordered">            <thead class="thead-light">                <tr>                    <th scope="col">Producto</th>                    <th scope="col">Pago Fijo</th>                </tr>            </thead>            <tbody>                <tr>                    <th scope="row">Valor de vivienda</th>                    <td>$${valor}</td>                </tr>                <tr>                    <th scope="row">Importe del crédito</th>                    <td>$${importe}</td>                </tr>                <tr>                    <th scope="row">Plazo del crédito</th>                    <td>${plazo} años</td>                </tr>                <tr>                    <th scope="row">Tasa de Interés</th>                    <td>${interesAnual}%</td>                </tr>                <tr>                    <th scope="row">Comisión por apertura</th>                    <td>$${cpa}</td>                </tr>                <tr>                    <th scope="row">Mensualidad</th>                    <td>$${mensualidad}</td>                </tr>                <tr>                    <th scope="row">CAT*</th>                    <td>${cat}%</td>                </tr>                <tr>                    <th scope="row">Ingresos mínimos</th>                    <td>$${im}</td>                </tr>            </tbody>        </table>        <p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p>        <div class="text-center my-foot">            <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5></div><div class="social-fotter"><p style="display: inline;" class="mr-4"><img class="social-icon" src="assets/wp.png" alt="Whatsapp">+52 999 233 0900 </p><p style="display: inline;"><img class="social-icon" src="assets/mail.png" alt="email">contacto@micreditus.com</p></div><div class="my-fotter">MiCreditus | Creditaria - Todos los derechos reservados © 2022</div></div>`
+            if (double) {
+                ct.innerHTML = `<div>        <div class="my-nav"><img src="assets/logo-cortado.png" alt="Logo" class="logo">            <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>        </div>        <div class="text-center my-5" style="color:#000000;">            <h4 style="text-transform:uppercase;">${nombre} esta es la mejor cotización para ti</h4>        </div>        <div class="mx-5">            <p>Banorte1</p>            <table class="table table-striped table-bordered">                <thead style="background-color: #70e0a0;">                    <tr>                        <th scope="col">Producto</th>                        <th scope="col">Pago Fijo</th>                    </tr>                </thead>                <tbody>                    <tr>                        <th scope="row">Valor de vivienda</th>                        <td>$${valor}</td>                    </tr>                    <tr>                        <th scope="row">Importe del crédito</th>                        <td>$${importe}</td>                    </tr>                    <tr>                        <th scope="row">Plazo del crédito</th>                        <td>${plazo} años</td>                    </tr>                    <tr>                        <th scope="row">Tasa de Interés</th>                        <td>${interesAnual}%</td>                    </tr>                    <tr>                        <th scope="row">Comisión por apertura</th>                        <td>$${cpa}</td>                    </tr>                    <tr>                        <th scope="row">Mensualidad</th>                        <td>$${mensualidad}</td>                    </tr>                    <tr>                        <th scope="row">CAT*</th>                        <td>${cat}%</td>                    </tr>                    <tr>                        <th scope="row">Ingresos mínimos</th>                        <td>$${im}</td>                    </tr>                </tbody>            </table><p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p>            <p id="pagina2" class="mt-5 pt-5">Banorte2</p>            <table class="table table-striped table-bordered">                <thead style="background-color: #70e0a0;">                    <tr>                        <th scope="col">Producto</th>                        <th scope="col">Pago Fijo</th>                    </tr>                </thead>                <tbody>                    <tr>                        <th scope="row">Valor de vivienda</th>                        <td>$${valor}</td>                    </tr>                    <tr>                        <th scope="row">Importe del crédito</th>                        <td>$${importe}</td>                    </tr>                    <tr>                        <th scope="row">Plazo del crédito</th>                        <td>${plazo} años</td>                    </tr>                    <tr>                        <th scope="row">Tasa de Interés</th>                        <td>${interesAnual2}%</td>                    </tr>                    <tr>                        <th scope="row">Comisión por apertura</th>                        <td>$${cpa2}</td>                    </tr>                    <tr>                        <th scope="row">Mensualidad</th>                        <td>$${mensualidad2}</td>                    </tr>                    <tr>                        <th scope="row">CAT*</th>                        <td>${cat2}%</td>                    </tr>                    <tr>                        <th scope="row">Ingresos mínimos</th>                        <td>$${im2}</td>                    </tr>                </tbody>            </table>        </div>        <p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p>        <div class="text-center mt-5 mb-3"> <img class="logo-alt mt-4" src="assets/asesor.png" alt="Asesor">            <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>            <p>Gracias a tu solicitud, te he enviado un correo con un comparativo de esta simulación con otras opciones                bancarias.</p>        </div>        <div class="social-fotter">            <p style="display: inline;" class="mr-4"><img class="social-icon" src="assets/wp.png" alt="Whatsapp">+52 999                233 0900 </p>            <p style="display: inline;"><img class="social-icon" src="assets/mail.png"                    alt="email">contacto@micreditus.com</p>        </div>        <div class="text-center mt-4">            <p><small>**Esta no es una cotización, sino una simulación aproximada de los valores solicitados. Ponte en                    contacto para ayudarte a evaluar todas las opciones y encontrar la propuesta que mejor se adapte a                    tus necesidades</small></p>        </div>        <div class="my-fotter mb-5">MiCreditus | Creditaria - Todos los derechos reservados © 2022</div>    </div>`
+                opt = {
+                    pagebreak: { before: '#pagina2' },
+                    margin: 1,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 1 },
+                    jsPDF: { format: 'a4', orientation: 'p' }
+                };
+
+            } else {
+                ct.innerHTML = `<div>        <div class="my-nav"><img src="assets/logo-cortado.png" alt="Logo" class="logo"><p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>        </div>        <div class="text-center my-4" style="color:#000000;">            <h4 style="text-transform:uppercase;">${nombre} esta es la mejor cotización para ti</h4>        </div>        <div class="mx-5"><table class="table table-striped table-bordered">            <thead style="background-color: #70e0a0;">                <tr>                    <th scope="col">Producto</th>                    <th scope="col">Pago Fijo</th>                </tr>            </thead>            <tbody>                <tr>                    <th scope="row">Valor de vivienda</th>                    <td>$${valor}</td>                </tr>                <tr>                    <th scope="row">Importe del crédito</th>                    <td>$${importe}</td>                </tr>                <tr>                    <th scope="row">Plazo del crédito</th>                    <td>${plazo} años</td>                </tr>                <tr>                    <th scope="row">Tasa de Interés</th>                    <td>${interesAnual}%</td>                </tr>                <tr>                    <th scope="row">Comisión por apertura</th>                    <td>$${cpa}</td>                </tr>                <tr>                    <th scope="row">Mensualidad</th>                    <td>$${mensualidad}</td>                </tr>                <tr>                    <th scope="row">CAT*</th>                    <td>${cat}%</td>                </tr>                <tr>                    <th scope="row">Ingresos mínimos</th>                    <td>$${im}</td>                </tr>            </tbody>        </table></div>        <p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p>        <div class="text-center mt-4 mb-3">            <img class="logo-alt" src="assets/asesor.png" alt="Asesor">            <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>            <p>Gracias a tu solicitud, te he enviado un correo con un comparativo de esta simulación con                otras opciones bancarias.</p>        </div>        <div class="social-fotter">            <p style="display: inline;" class="mr-4"><img class="social-icon" src="assets/wp.png" alt="Whatsapp">+52 999                233 0900 </p>            <p style="display: inline;"><img class="social-icon" src="assets/mail.png"                    alt="email">contacto@micreditus.com</p>        </div>        <div class="text-center mt-4">            <p><small>**Esta no es una cotización, sino una simulación aproximada de los valores solicitados.                    Ponte en contacto para ayudarte a evaluar todas las opciones y encontrar la propuesta                    que mejor se adapte a tus necesidades</small></p>        </div>        <div class="my-fotter">MiCreditus | Creditaria - Todos los derechos reservados © 2022</div>    </div>`
+            }
+
             var worker = html2pdf().set(opt).from(ct).save('Cotización').then(() => {
                 document.getElementById("mostrar").style.display = "none"
                 document.getElementById("final").style.display = "block"

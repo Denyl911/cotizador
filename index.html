@@ -303,6 +303,7 @@
         var cpa2 = 0;
         var im2 = 0;
         var mensualidad2 = 0;
+        var productName = '';
 
         switch (banco) {
           case 'HSBC':
@@ -314,6 +315,7 @@
             var factor = Math.pow(1 + intereses, -plazo * 12);
             mensualidad = importe * (intereses / (1 - factor));
             mensualidad = mensualidad.toFixed(2);
+            productName = 'Hipoteca Personal';
             break;
           case 'Scotiabank':
             cat = 11.7;
@@ -324,6 +326,7 @@
             var factor = Math.pow(1 + intereses, -plazo * 12);
             mensualidad = importe * (intereses / (1 - factor));
             mensualidad = mensualidad.toFixed(2);
+            productName = 'Pagos Oportunos';
             break;
           case 'Santander':
             cat = 11.8;
@@ -334,6 +337,7 @@
             var factor = Math.pow(1 + intereses, -plazo * 12);
             mensualidad = importe * (intereses / (1 - factor));
             mensualidad = mensualidad.toFixed(2);
+            productName = 'Hipoteca Personal';
             break;
           case 'Banregio':
             cat = 12.6;
@@ -344,6 +348,7 @@
             var factor = Math.pow(1 + intereses, -plazo * 12);
             mensualidad = importe * (intereses / (1 - factor));
             mensualidad = mensualidad.toFixed(2);
+            productName = 'Hipoteca Flex';
             break;
           case 'Banorte':
             double = true;
@@ -363,6 +368,7 @@
             var factor2 = Math.pow(1 + intereses2, -plazo * 12);
             mensualidad2 = importe * (intereses2 / (1 - factor2));
             mensualidad2 = mensualidad2.toFixed(2);
+            productName = 'Hipoteca Fuerte';
             break;
           case 'BX+':
             cat = 11.4;
@@ -373,6 +379,7 @@
             var factor = Math.pow(1 + intereses, -plazo * 12);
             mensualidad = importe * (intereses / (1 - factor));
             mensualidad = mensualidad.toFixed(2);
+            productName = 'Adquisicion Pago Fijo';
             break;
           case 'Banamex':
             cat = 11.6;
@@ -383,6 +390,7 @@
             var factor = Math.pow(1 + intereses, -plazo * 12);
             mensualidad = importe * (intereses / (1 - factor));
             mensualidad = mensualidad.toFixed(2);
+            productName = 'Hipoteca Perfiles';
             break;
           case 'Afirme':
             cat = 11.6;
@@ -393,9 +401,9 @@
             var factor = Math.pow(1 + intereses, -plazo * 12);
             mensualidad = importe * (intereses / (1 - factor));
             mensualidad = mensualidad.toFixed(2);
+            productName = 'Pago Fijo, Aforo Alto';
             break;
         }
-
         var opt = {
           margin: 1,
           image: { type: 'jpeg', quality: 0.98 },
@@ -426,7 +434,7 @@
             cat2
           )}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
             im2
-          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-5 mb-3">    <img class="logo-alt mt-4" src="assets/rodrigo.webp" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="assets/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="assets/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center" style="margin-top: 2.1rem">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter mb-5">    <p class="mt-2">      MiCreditus | Creditaria - Todos los derechos reservados © 2022    </p>    <p      style="        position: relative;        bottom: 25px;        right: -350px;        color: #212529;        z-index: 999;      "    >      2/2    </p>  </div></div>`;
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-5 mb-3">    <img class="logo-alt mt-4" src="assets/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="assets/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="assets/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center" style="margin-top: 2.1rem">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter mb-5">    <p class="mt-2">      MiCreditus | Creditaria - Todos los derechos reservados © 2022    </p>    <p      style="        position: relative;        bottom: 25px;        right: -350px;        color: #212529;        z-index: 999;      "    >      2/2    </p>  </div></div>`;
           opt = {
             pagebreak: { before: '#pagina2' },
             margin: 1,
@@ -436,7 +444,7 @@
             enableLinks: true,
           };
         } else {
-          ct.innerHTML = `<div>  <div class="my-nav">    <img src="assets/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center my-4" style="color: #000000">    <h4 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h4>  </div>  <div class="mx-5">    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+          ct.innerHTML = `<div>  <div class="my-nav">    <img src="assets/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center mt-4 mb-2" style="color: #000000">    <h5 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h5>  </div>  <div class="mx-5">    <p>${productName}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
             document.getElementById('valor').value
           }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
             document.getElementById('importe').value
@@ -446,7 +454,7 @@
             mensualidad
           )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${cat}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
             im
-          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-4 mb-3">    <img class="logo-alt" src="assets/rodrigo.webp" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="assets/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="assets/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center mt-4">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter">    MiCreditus | Creditaria - Todos los derechos reservados © 2022    <p      style="        position: relative;        bottom: 10px;        right: -360px;        color: #212529;        z-index: 999;      "    >      1/1    </p>  </div></div>`;
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-4 mb-3">    <img class="logo-alt" src="assets/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="assets/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="assets/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-left mt-1">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter">    MiCreditus | Creditaria - Todos los derechos reservados © 2022    <p      style="        position: relative;        bottom: 10px;        right: -360px;        color: #212529;        z-index: 999;      "    >      1/1    </p>  </div></div>`;
         }
 
         html2pdf()

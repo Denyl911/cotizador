@@ -1,321 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"
+      integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <style>
-        #mostrar {
-            display: none;
-        }
+      #mostrar {
+        display: none;
+      }
 
-        #final {
-            display: none;
-        }
+      #final {
+        display: none;
+      }
 
-        #paso-2 {
-            display: none;
-        }
+      #paso-2 {
+        display: none;
+      }
 
-        #required-fields1 {
-            display: none;
-        }
+      #required-fields1 {
+        display: none;
+      }
 
-        #required-fields2 {
-            display: none;
-        }
+      #required-fields2 {
+        display: none;
+      }
 
-        .my-border {
-            border-style: solid;
-            border-radius: 15px;
-            border-color: rgb(23, 124, 45);
-            padding: 30px;
-        }
+      .my-border {
+        border-style: solid;
+        border-radius: 15px;
+        border-color: rgb(23, 124, 45);
+        padding: 30px;
+      }
 
-        .my-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #e9ecef;
-            padding-left: 15%;
-            padding-right: 12%;
-            width: 120%;
-            margin-left: -10%;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
+      .my-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e9ecef;
+        padding-left: 15%;
+        padding-right: 12%;
+        width: 120%;
+        margin-left: -10%;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
 
-        .my-fotter {
-            text-align: center;
-            color: #ffffff;
-            background-color: #1b5a4a;
-            padding-top: 15px;
-            padding-bottom: 20px;
-            width: 120%;
-            margin-left: -10%;
-            min-height: 180px;
-            margin-bottom: 15px;
-        }
+      .my-fotter {
+        text-align: center;
+        color: #ffffff;
+        background-color: #1b5a4a;
+        padding-top: 15px;
+        padding-bottom: 20px;
+        width: 120%;
+        margin-left: -10%;
+        min-height: 183px;
+        margin-bottom: 15px;
+      }
 
-        .logo {
-            width: 200px;
-            height: auto;
-        }
+      .logo {
+        width: 200px;
+        height: auto;
+      }
 
-        .logo-alt {
-            width: 150px;
-            height: auto;
-        }
+      .logo-alt {
+        width: 150px;
+        height: auto;
+      }
 
-        .social-fotter {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
+      .social-fotter {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
 
-        .social-icon {
-            width: 35px;
-            height: auto;
-            margin-right: 6px;
-        }
+      .social-icon {
+        width: 35px;
+        height: auto;
+        margin-right: 6px;
+      }
     </style>
     <title>Cotizador - MiCreditus</title>
-</head>
+  </head>
 
-<body>
-    <div class="container mt-3 text-center">
-        <h1 class="mb-4">Cotizador</h1>
-        <div class="my-border mb-3">
-            <div id="paso-1">
-                <label for="valor">¿Cual es el valor de la vivienda a comprar?</label>
-                <input type="number" class="form-control mb-3" id="valor" placeholder="$2,000,000" />
-                <label for="importe">¿Cual es el importe de credito que necesitas?</label>
-                <input type="number" class="form-control mb-3" id="importe" placeholder="$1,000,000" />
-                <label for="plazo">Plazo</label>
-                <select class="form-control mb-3" id="plazo">
-                    <option selected disabled value="0">Elije...</option>
-                    <option value="10">10 años</option>
-                    <option value="15">15 años</option>
-                    <option value="20">20 años</option>
-                </select>
-                <label for="esquema">Esquema</label>
-                <select class="form-control mb-3" id="esquema">
-                    <option selected value="fijo">Pago fijo</option>
-                </select>
-                <label for="banco">Banco</label>
-                <select class="form-control mb-3" id="banco">
-                    <option selected disabled value="0">Elije...</option>
-                    <option value="hsbc">HSBC</option>
-                    <option value="scotiabank">Scotiabank</option>
-                    <option value="santander">Santander</option>
-                    <option value="banregio">Banregio</option>
-                    <option value="banorte">Banorte</option>
-                    <option value="bx">BX+</option>
-                    <option value="banamex">Banamex</option>
-                    <option value="afirme">Afirme</option>
-                </select>
-                <div id="required-fields1">
-                    <p style="color: #e70d0d;">Completa todos los campos</p>
-                </div>
-                <div class="text-center mt-4">
-                    <button type="button" id="nextBtn" class="btn btn-success btn-lg">Siguiente</button>
-                </div>
-            </div>
-            <div id="paso-2">
-                <label for="nombre">Nombre</label>
-                <input type="tel" class="form-control mb-3" id="nombre" placeholder="Tu nombre" />
-                <label for="numero">Numero de telefono</label>
-                <input type="number" class="form-control mb-3" id="numero" placeholder="5522668899" />
-                <label for="mail">Correo electronico</label>
-                <input type="email" class="form-control mb-3" id="mail" placeholder="email@email.com" />
-                <div id="required-fields2">
-                    <p style="color: #e70d0d;">Completa todos los campos</p>
-                </div>
-                <div class="text-center mt-4">
-                    <button type="button" id="sendBtn" class="btn btn-success btn-lg">Cotizar</button>
-                    <div class="mt-3" id="mostrar">
-                        <h4>Espera un momento ...</h4>
-                        <p>Estamos obteniendo el mejor presupuesto para ti</p>
-                    </div>
-                    <div class="mt-3" id="final">
-                        <h3>Listo ya tenemos el mejor presupuesto para ti</h3>
-                    </div>
-                </div>
-            </div>
+  <body>
+    <div class="container mt-4 text-center">
+      <h1 class="mb-4">¡Cotiza tu crédito hipotecario!</h1>
+      <div class="my-border mb-3">
+        <img
+          src="assets/logo-cortado.png"
+          class="mb-4"
+          style="width: 15em; height: auto"
+          alt=""
+        />
+        <div id="paso-1">
+          <label for="valor">¿Cual es el valor de la vivienda a comprar?</label>
+          <input
+            class="form-control mb-3"
+            id="valor"
+            placeholder="$2,000,000"
+          />
+          <label for="importe"
+            >¿Cual es el importe de credito que necesitas?</label
+          >
+          <input
+            class="form-control mb-3"
+            id="importe"
+            placeholder="$1,000,000"
+          />
+          <label for="plazo">Plazo</label>
+          <select class="form-control mb-3" id="plazo">
+            <option selected disabled value="0">Elije...</option>
+            <option value="10">10 años</option>
+            <option value="15">15 años</option>
+            <option value="20">20 años</option>
+          </select>
+          <label for="esquema">Esquema</label>
+          <select class="form-control mb-3" id="esquema">
+            <option selected value="fijo">Pago fijo</option>
+          </select>
+          <label for="banco">Banco</label>
+          <select class="form-control mb-3" id="banco">
+            <option selected disabled value="0">Elije...</option>
+            <option value="HSBC">HSBC</option>
+            <option value="Scotiabank">Scotiabank</option>
+            <option value="Santander">Santander</option>
+            <option value="Banregio">Banregio</option>
+            <option value="Banorte">Banorte</option>
+            <option value="BX+">BX+</option>
+            <option value="Banamex">Banamex</option>
+            <option value="Afirme">Afirme</option>
+          </select>
+          <div id="required-fields1">
+            <p style="color: #e70d0d">Completa todos los campos</p>
+          </div>
+          <div class="text-center mt-4">
+            <button type="button" id="nextBtn" class="btn btn-success btn-lg">
+              Siguiente
+            </button>
+          </div>
         </div>
+        <div id="paso-2">
+          <label for="nombre">Nombre</label>
+          <input
+            type="tel"
+            class="form-control mb-3"
+            id="nombre"
+            placeholder="Tu nombre"
+          />
+          <label for="numero">Número de telefono / Whatsapp </label>
+          <input
+            class="form-control mb-3"
+            id="numero"
+            placeholder="(###) ###-####"
+          />
+          <label for="mail">Correo electronico</label>
+          <input
+            type="email"
+            class="form-control mb-3"
+            id="mail"
+            placeholder="email@email.com"
+          />
+          <div id="required-fields2">
+            <p style="color: #e70d0d">Completa todos los campos</p>
+          </div>
+          <div class="text-center mt-4">
+            <button type="button" id="sendBtn" class="btn btn-success btn-lg">
+              Cotizar
+            </button>
+            <div class="mt-3" id="mostrar">
+              <h4>Espera un momento ...</h4>
+              <p>Estamos obteniendo el mejor presupuesto para ti</p>
+            </div>
+            <div class="mt-3" id="final">
+              <h3>Listo ya tenemos el mejor presupuesto para ti</h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-</body>
-<script>
-    document.getElementById("nextBtn").addEventListener("click", () => {
-        if (document.getElementById("valor").value && document.getElementById("importe").value && document.getElementById("plazo").value != "0" && document.getElementById("banco").value != "0") {
-            document.getElementById("paso-2").style.display = "block";
-            document.getElementById("paso-1").style.display = "none";
-        } else {
-            document.getElementById("required-fields1").style.display = "block";
+  </body>
+  <script>
+    function separateComma(val) {
+      let num = val.toString().includes('.')
+        ? val.toString().split('.')[0]
+        : val.toString();
+      let len = num.toString().length;
+      let result = '';
+      let count = 1;
+      for (let i = len - 1; i >= 0; i--) {
+        result = num.toString()[i] + result;
+        if (count % 3 === 0 && count !== 0 && i !== 0) {
+          result = ',' + result;
         }
-    })
+        count++;
+      }
+      if (val.toString().includes('.')) {
+        result = result + '.' + val.toString().split('.')[1];
+      }
+      return result;
+    }
 
-    document.getElementById("sendBtn").addEventListener("click", () => {
-        if (document.getElementById("nombre").value && document.getElementById("numero").value && document.getElementById("mail").value) {
-            document.getElementById("paso-2").style.display = "block";
-            document.getElementById("paso-1").style.display = "none";
-            document.getElementById("mostrar").style.display = "block";
+    var valorVal = new Cleave('#valor', {
+      numeral: true,
+      prefix: '$',
+      signBeforePrefix: true,
+      rawValueTrimPrefix: true,
+      numeralPositiveOnly: true,
+      numeralDecimalScale: 2,
+      noImmediatePrefix: true,
+    });
+    var importeVal = new Cleave('#importe', {
+      numeral: true,
+      prefix: '$',
+      signBeforePrefix: true,
+      rawValueTrimPrefix: true,
+      numeralPositiveOnly: true,
+      numeralDecimalScale: 2,
+      noImmediatePrefix: true,
+    });
+    var cel = new Cleave('#numero', {
+      blocks: [0, 3, 3, 4],
+      delimiters: ['(', ') ', '-'],
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (
+        document.getElementById('valor').value &&
+        document.getElementById('importe').value &&
+        document.getElementById('plazo').value != '0' &&
+        document.getElementById('banco').value != '0'
+      ) {
+        document.getElementById('paso-2').style.display = 'block';
+        document.getElementById('paso-1').style.display = 'none';
+      } else {
+        document.getElementById('required-fields1').style.display = 'block';
+      }
+    });
 
-            window.scrollTo(0, 0)
-            var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-            var currentDate = new Date()
-            var dia = currentDate.getDate()
-            var mes = meses[currentDate.getMonth()]
-            var ano = currentDate.getFullYear()
-            var ct = document.createElement('div')
-            var valor = document.getElementById("valor").value
-            var importe = document.getElementById("importe").value
-            var plazo = document.getElementById("plazo").value
-            var esquema = document.getElementById("esquema").value
-            var banco = document.getElementById("banco").value
-            var nombre = document.getElementById("nombre").value
-            var intereses = 0
-            var interesAnual = 0
-            var cat = 0
-            var cpa = 0
-            var im = 0
-            var mensualidad = 0
-            var double = false
-            var intereses2 = 0
-            var interesAnual2 = 0
-            var cat2 = 0
-            var cpa2 = 0
-            var im2 = 0
-            var mensualidad2 = 0
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      if (
+        document.getElementById('nombre').value &&
+        document.getElementById('numero').value &&
+        document.getElementById('mail').value
+      ) {
+        document.getElementById('paso-2').style.display = 'block';
+        document.getElementById('paso-1').style.display = 'none';
+        document.getElementById('mostrar').style.display = 'block';
 
-            switch (banco) {
-                case "hsbc":
-                    cat = 10.5
-                    im = 30105
-                    cpa = 18000
-                    interesAnual = 8.9
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    break
-                case "scotiabank":
-                    cat = 11.7
-                    im = 35469
-                    cpa = 22500
-                    interesAnual = 9.95
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    break
-                case "santander":
-                    cat = 11.8
-                    im = 48478
-                    cpa = 18000
-                    interesAnual = 9.59
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    break
-                case "banregio":
-                    cat = 12.6
-                    im = 41805
-                    cpa = 27000
-                    interesAnual = 10.1
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    break
-                case "banorte":
-                    double = true
-                    cat = 11.3
-                    im = 39710
-                    cpa = 18000
-                    interesAnual = 9
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    cat2 = 10.2
-                    im2 = 37602
-                    cpa2 = 18000
-                    interesAnual2 = 8
-                    intereses2 = interesAnual2 / 100 / 12
-                    var factor2 = Math.pow(1 + intereses2, -plazo * 12)
-                    mensualidad2 = importe * (intereses2 / (1 - factor2))
-                    mensualidad2 = mensualidad2.toFixed(2)
-                    break
-                case "bx":
-                    cat = 11.4
-                    im = 50085
-                    cpa = 27000
-                    interesAnual = 9.9
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    break
-                case "banamex":
-                    cat = 11.6
-                    im = 48874
-                    cpa = 0
-                    interesAnual = 9
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    break
-                case "afirme":
-                    cat = 11.6
-                    im = 30105
-                    cpa = 0
-                    interesAnual = 9.9
-                    intereses = interesAnual / 100 / 12
-                    var factor = Math.pow(1 + intereses, -plazo * 12)
-                    mensualidad = importe * (intereses / (1 - factor))
-                    mensualidad = mensualidad.toFixed(2)
-                    break
-            }
+        window.scrollTo(0, 0);
+        var meses = [
+          'Enero',
+          'Febrero',
+          'Marzo',
+          'Abril',
+          'Mayo',
+          'Junio',
+          'Julio',
+          'Agosto',
+          'Septiembre',
+          'Octubre',
+          'Noviembre',
+          'Diciembre',
+        ];
+        var currentDate = new Date();
+        var dia = currentDate.getDate();
+        var mes = meses[currentDate.getMonth()];
+        var ano = currentDate.getFullYear();
+        var ct = document.createElement('div');
+        var valor = valorVal.getRawValue();
+        var importe = importeVal.getRawValue();
+        var plazo = document.getElementById('plazo').value;
+        var esquema = document.getElementById('esquema').value;
+        var banco = document.getElementById('banco').value;
+        var nombre = document.getElementById('nombre').value;
+        var intereses = 0;
+        var interesAnual = 0;
+        var cat = 0;
+        var cpa = 0;
+        var im = 0;
+        var mensualidad = 0;
+        var double = false;
+        var intereses2 = 0;
+        var interesAnual2 = 0;
+        var cat2 = 0;
+        var cpa2 = 0;
+        var im2 = 0;
+        var mensualidad2 = 0;
 
-            var opt = {
-                margin: 1,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 1 },
-                jsPDF: { format: 'a4', orientation: 'p' }
-            };
-            if (double) {
-                ct.innerHTML = `<div>        <div class="my-nav"><img src="assets/logo-cortado.png" alt="Logo" class="logo">            <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>        </div>        <div class="text-center my-5" style="color:#000000;">            <h4 style="text-transform:uppercase;">${nombre} esta es la mejor cotización para ti</h4>        </div>        <div class="mx-5">            <p>Banorte1</p>            <table class="table table-striped table-bordered">                <thead style="background-color: #70e0a0;">                    <tr>                        <th scope="col">Producto</th>                        <th scope="col">Pago Fijo</th>                    </tr>                </thead>                <tbody>                    <tr>                        <th scope="row">Valor de vivienda</th>                        <td>$${valor}</td>                    </tr>                    <tr>                        <th scope="row">Importe del crédito</th>                        <td>$${importe}</td>                    </tr>                    <tr>                        <th scope="row">Plazo del crédito</th>                        <td>${plazo} años</td>                    </tr>                    <tr>                        <th scope="row">Tasa de Interés</th>                        <td>${interesAnual}%</td>                    </tr>                    <tr>                        <th scope="row">Comisión por apertura</th>                        <td>$${cpa}</td>                    </tr>                    <tr>                        <th scope="row">Mensualidad</th>                        <td>$${mensualidad}</td>                    </tr>                    <tr>                        <th scope="row">CAT*</th>                        <td>${cat}%</td>                    </tr>                    <tr>                        <th scope="row">Ingresos mínimos</th>                        <td>$${im}</td>                    </tr>                </tbody>            </table><p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p>            <p id="pagina2" class="mt-5 pt-5">Banorte2</p>            <table class="table table-striped table-bordered">                <thead style="background-color: #70e0a0;">                    <tr>                        <th scope="col">Producto</th>                        <th scope="col">Pago Fijo</th>                    </tr>                </thead>                <tbody>                    <tr>                        <th scope="row">Valor de vivienda</th>                        <td>$${valor}</td>                    </tr>                    <tr>                        <th scope="row">Importe del crédito</th>                        <td>$${importe}</td>                    </tr>                    <tr>                        <th scope="row">Plazo del crédito</th>                        <td>${plazo} años</td>                    </tr>                    <tr>                        <th scope="row">Tasa de Interés</th>                        <td>${interesAnual2}%</td>                    </tr>                    <tr>                        <th scope="row">Comisión por apertura</th>                        <td>$${cpa2}</td>                    </tr>                    <tr>                        <th scope="row">Mensualidad</th>                        <td>$${mensualidad2}</td>                    </tr>                    <tr>                        <th scope="row">CAT*</th>                        <td>${cat2}%</td>                    </tr>                    <tr>                        <th scope="row">Ingresos mínimos</th>                        <td>$${im2}</td>                    </tr>                </tbody>            </table>        </div>        <p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p>        <div class="text-center mt-5 mb-3"> <img class="logo-alt mt-4" src="assets/asesor.png" alt="Asesor">            <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>            <p>Gracias a tu solicitud, te he enviado un correo con un comparativo de esta simulación con otras opciones                bancarias.</p>        </div>        <div class="social-fotter">            <p style="display: inline;" class="mr-4"><img class="social-icon" src="assets/wp.png" alt="Whatsapp">+52 999                233 0900 </p>            <p style="display: inline;"><img class="social-icon" src="assets/mail.png"                    alt="email">contacto@micreditus.com</p>        </div>        <div class="text-center mt-4">            <p><small>**Esta no es una cotización, sino una simulación aproximada de los valores solicitados. Ponte en                    contacto para ayudarte a evaluar todas las opciones y encontrar la propuesta que mejor se adapte a                    tus necesidades</small></p>        </div>        <div class="my-fotter mb-5">MiCreditus | Creditaria - Todos los derechos reservados © 2022</div>    </div>`
-                opt = {
-                    pagebreak: { before: '#pagina2' },
-                    margin: 1,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 1 },
-                    jsPDF: { format: 'a4', orientation: 'p' }
-                };
-
-            } else {
-                ct.innerHTML = `<div>        <div class="my-nav"><img src="assets/logo-cortado.png" alt="Logo" class="logo"><p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>        </div>        <div class="text-center my-4" style="color:#000000;">            <h4 style="text-transform:uppercase;">${nombre} esta es la mejor cotización para ti</h4>        </div>        <div class="mx-5"><table class="table table-striped table-bordered">            <thead style="background-color: #70e0a0;">                <tr>                    <th scope="col">Producto</th>                    <th scope="col">Pago Fijo</th>                </tr>            </thead>            <tbody>                <tr>                    <th scope="row">Valor de vivienda</th>                    <td>$${valor}</td>                </tr>                <tr>                    <th scope="row">Importe del crédito</th>                    <td>$${importe}</td>                </tr>                <tr>                    <th scope="row">Plazo del crédito</th>                    <td>${plazo} años</td>                </tr>                <tr>                    <th scope="row">Tasa de Interés</th>                    <td>${interesAnual}%</td>                </tr>                <tr>                    <th scope="row">Comisión por apertura</th>                    <td>$${cpa}</td>                </tr>                <tr>                    <th scope="row">Mensualidad</th>                    <td>$${mensualidad}</td>                </tr>                <tr>                    <th scope="row">CAT*</th>                    <td>${cat}%</td>                </tr>                <tr>                    <th scope="row">Ingresos mínimos</th>                    <td>$${im}</td>                </tr>            </tbody>        </table></div>        <p><small>* La tasa de interes puede disminuir por buen comportamiento de pago</small></p>        <div class="text-center mt-4 mb-3">            <img class="logo-alt" src="assets/asesor.png" alt="Asesor">            <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>            <p>Gracias a tu solicitud, te he enviado un correo con un comparativo de esta simulación con                otras opciones bancarias.</p>        </div>        <div class="social-fotter">            <p style="display: inline;" class="mr-4"><img class="social-icon" src="assets/wp.png" alt="Whatsapp">+52 999                233 0900 </p>            <p style="display: inline;"><img class="social-icon" src="assets/mail.png"                    alt="email">contacto@micreditus.com</p>        </div>        <div class="text-center mt-4">            <p><small>**Esta no es una cotización, sino una simulación aproximada de los valores solicitados.                    Ponte en contacto para ayudarte a evaluar todas las opciones y encontrar la propuesta                    que mejor se adapte a tus necesidades</small></p>        </div>        <div class="my-fotter">MiCreditus | Creditaria - Todos los derechos reservados © 2022</div>    </div>`
-            }
-
-            var worker = html2pdf().set(opt).from(ct).save('Cotización').then(() => {
-                document.getElementById("mostrar").style.display = "none"
-                document.getElementById("final").style.display = "block"
-            })
-        } else {
-            document.getElementById("required-fields2").style.display = "block";
+        switch (banco) {
+          case 'HSBC':
+            cat = 10.5;
+            im = 30105;
+            cpa = 18000;
+            interesAnual = 8.9;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            break;
+          case 'Scotiabank':
+            cat = 11.7;
+            im = 35469;
+            cpa = 22500;
+            interesAnual = 9.95;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            break;
+          case 'Santander':
+            cat = 11.8;
+            im = 48478;
+            cpa = 18000;
+            interesAnual = 9.59;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            break;
+          case 'Banregio':
+            cat = 12.6;
+            im = 41805;
+            cpa = 27000;
+            interesAnual = 10.1;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            break;
+          case 'Banorte':
+            double = true;
+            cat = 11.3;
+            im = 39710;
+            cpa = 18000;
+            interesAnual = 9;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            cat2 = 10.2;
+            im2 = 37602;
+            cpa2 = 18000;
+            interesAnual2 = 8;
+            intereses2 = interesAnual2 / 100 / 12;
+            var factor2 = Math.pow(1 + intereses2, -plazo * 12);
+            mensualidad2 = importe * (intereses2 / (1 - factor2));
+            mensualidad2 = mensualidad2.toFixed(2);
+            break;
+          case 'BX+':
+            cat = 11.4;
+            im = 50085;
+            cpa = 27000;
+            interesAnual = 9.9;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            break;
+          case 'Banamex':
+            cat = 11.6;
+            im = 48874;
+            cpa = 0;
+            interesAnual = 9;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            break;
+          case 'Afirme':
+            cat = 11.6;
+            im = 30105;
+            cpa = 0;
+            interesAnual = 9.9;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            break;
         }
-    })
-</script>
 
+        var opt = {
+          margin: 1,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 1 },
+          jsPDF: { format: 'a4', orientation: 'p' },
+          enableLinks: true,
+        };
+        if (double) {
+          ct.innerHTML = `<div>  <div class="my-nav">    <img src="assets/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center my-5" style="color: #000000">    <h4 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h4>  </div>  <div class="mx-5">    <p>Banorte1</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+            document.getElementById('valor').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
+            document.getElementById('importe').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Plazo del crédito</th>          <td>${plazo} años</td>        </tr>        <tr>          <th scope="row">Tasa de Interés</th>          <td>${interesAnual}%</td>        </tr>        <tr>          <th scope="row">Comisión por apertura</th>          <td>$${separateComma(
+            cpa
+          )}</td>        </tr>        <tr>          <th scope="row">Mensualidad</th>          <td>$${separateComma(
+            mensualidad
+          )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${cat}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
+            im
+          )}</td>        </tr>      </tbody>    </table>    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>    <p style="position: relative; top: 320px; right: -680px; z-index: 999">      1/2    </p>    <p id="pagina2" class="mt-5 pt-5">Banorte2</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+            document.getElementById('valor').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
+            document.getElementById('importe').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Plazo del crédito</th>          <td>${plazo} años</td>        </tr>        <tr>          <th scope="row">Tasa de Interés</th>          <td>${interesAnual2}%</td>        </tr>        <tr>          <th scope="row">Comisión por apertura</th>          <td>$${separateComma(
+            cpa2
+          )}</td>        </tr>        <tr>          <th scope="row">Mensualidad</th>          <td>$${separateComma(
+            mensualidad2
+          )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${separateComma(
+            cat2
+          )}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
+            im2
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-5 mb-3">    <img class="logo-alt mt-4" src="assets/rodrigo.webp" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="assets/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="assets/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center" style="margin-top: 2.1rem">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter mb-5">    <p class="mt-2">      MiCreditus | Creditaria - Todos los derechos reservados © 2022    </p>    <p      style="        position: relative;        bottom: 25px;        right: -350px;        color: #212529;        z-index: 999;      "    >      2/2    </p>  </div></div>`;
+          opt = {
+            pagebreak: { before: '#pagina2' },
+            margin: 1,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 1 },
+            jsPDF: { format: 'a4', orientation: 'p' },
+            enableLinks: true,
+          };
+        } else {
+          ct.innerHTML = `<div>  <div class="my-nav">    <img src="assets/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center my-4" style="color: #000000">    <h4 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h4>  </div>  <div class="mx-5">    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+            document.getElementById('valor').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
+            document.getElementById('importe').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Plazo del crédito</th>          <td>${plazo} años</td>        </tr>        <tr>          <th scope="row">Tasa de Interés</th>          <td>${interesAnual}%</td>        </tr>        <tr>          <th scope="row">Comisión por apertura</th>          <td>$${separateComma(
+            cpa
+          )}</td>        </tr>        <tr>          <th scope="row">Mensualidad</th>          <td>$${separateComma(
+            mensualidad
+          )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${cat}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
+            im
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-4 mb-3">    <img class="logo-alt" src="assets/rodrigo.webp" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="assets/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="assets/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center mt-4">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter">    MiCreditus | Creditaria - Todos los derechos reservados © 2022    <p      style="        position: relative;        bottom: 10px;        right: -360px;        color: #212529;        z-index: 999;      "    >      1/1    </p>  </div></div>`;
+        }
+
+        html2pdf()
+          .set(opt)
+          .from(ct)
+          .save('Cotización')
+          .then(() => {
+            document.getElementById('mostrar').style.display = 'none';
+            document.getElementById('final').style.display = 'block';
+          });
+      } else {
+        document.getElementById('required-fields2').style.display = 'block';
+      }
+    });
+  </script>
 </html>

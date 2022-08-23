@@ -2,14 +2,16 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['archivo']) && isset($_POST['correo'])) {
     $data = json_decode(file_get_contents('php://input'), true);
     $from = "rodrigo@micreditus.com";
-    $subject = "COTIZACION";
+    $subject = "Cotización - MiCreditus";
 
+    $valor = $_POST["valor"];
     $importe = $_POST["importe"];
     $plazo = $_POST["plazo"];
+    $banco = $_POST["banco"];
     $name = $_POST["nombre"];
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
-    $message = "Testeo";
+    $message = "Nombre: " . $name . "\n" . "Correo: " . $correo . "\n" . "Telefono: " . $telefono . "\n" . "Valor de la vivienda: " . $valor . "\n" . "Importe de credito solicitado: " . $importe . "\n" . "Plazo: " . $plazo . "\n" . "Banco: " . $banco . "\n";
 
     //Get uploaded file data using $_FILES array
     $tmp_name = $_FILES['archivo']['tmp_name']; // get the temporary file name of the file on the server
@@ -17,6 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['archivo']) && isset($
     $size = $_FILES['archivo']['size']; // get size of the file for size validation
     $type = $_FILES['archivo']['type']; // get type of the file
     $error = $_FILES['archivo']['error']; // get the error (if any)
+
+    if ($error > 0) {
+        echo 'Upload error or No files uploaded';
+        die('Upload error or No files uploaded');
+    }
 
     //read from the uploaded file & base64_encode content
     $handle = fopen($tmp_name, "r"); // set the file handle only for reading the file
@@ -28,8 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['archivo']) && isset($
 
     //header
     $headers = "MIME-Version: 1.0\r\n"; // Defining the MIME version
-    $headers .= "From:" . $from . "\r\n"; // Sender Email
-    //$headers .= "Reply-To: ".$reply_to_email."\r\n"; // Email address to reach back
+    $headers .= "From: Rodrigo Puerto - MiCreditus <" . $from . ">\r\n"; // Sender Email
+    //$headers .= "Reply-To: ".$from."\r\n"; // Email address to reach back
+    $headers .= "Return-Path:" . $from . "\r\n";
     $headers .= "Content-Type: multipart/mixed;"; // Defining Content-Type
     $headers .= "boundary = $boundary\r\n"; //Defining the Boundary
 
@@ -50,14 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['archivo']) && isset($
     $sentMailResult = mail($correo, $subject, $body, $headers);
 
     if ($sentMailResult) {
-        echo "<h3>File Sent Successfully.<h3>";
-        // unlink($name); // delete the file after attachment sent.
+        echo json_encode('{"message": "success"}');
     } else {
+        echo json_encode('{"message": "Error al enviar el email"}');
         die("Sorry but the email could not be sent.
                     Please go back and try again!");
     }
-    //mail($to, $subject, $msg, $headers);
-    echo json_encode('{"data:' . $data['msg'] . '"}');
 } else {
-    echo json_encode('{"message: No valido"}');
+    echo ('{"message": "No valido "}' . $_POST['correo'] . "cor");
+    echo $_SERVER["REQUEST_METHOD"];
+    echo $_FILES['archivo']['name'];
 }

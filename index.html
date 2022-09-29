@@ -103,7 +103,7 @@
 
   <body>
     <div class="container mt-4 text-center">
-      <h1 class="mb-4">¡Cotiza tu crédito hipotecario!</h1>
+      <h1 class="mb-4" id="stepTitle">¡Cotiza tu crédito hipotecario!</h1>
       <div class="my-border mb-3">
         <img
           src="https://www.micreditus.com/wp-content/uploads/2022/08/logo-cortado.png"
@@ -184,7 +184,7 @@
           </div>
           <div class="text-center mt-4">
             <button type="button" id="sendBtn" class="btn btn-success btn-lg">
-              Cotizar
+              Descargar Documento
             </button>
             <div class="mt-3" id="mostrar">
               <h4>Espera un momento ...</h4>
@@ -205,12 +205,12 @@
       />
       <img
         class="social-icon"
-        src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png"
+        src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png"
         alt="email"
       />
       <img
         class="social-icon"
-        src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png"
+        src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png"
         alt="Whatsapp"
       />
     </div>
@@ -265,6 +265,8 @@
         document.getElementById('plazo').value != '0' &&
         document.getElementById('banco').value != '0'
       ) {
+        document.getElementById('stepTitle').innerHTML =
+          'Descarga tu cotización ahora';
         document.getElementById('paso-2').style.display = 'block';
         document.getElementById('paso-1').style.display = 'none';
       } else {
@@ -272,7 +274,8 @@
       }
     });
 
-    document.getElementById('sendBtn').addEventListener('click', () => {
+    var ct = document.createElement('div');
+    function calculate() {
       if (
         document.getElementById('nombre').value &&
         document.getElementById('numero').value &&
@@ -301,12 +304,219 @@
         var dia = currentDate.getDate();
         var mes = meses[currentDate.getMonth()];
         var ano = currentDate.getFullYear();
-        var ct = document.createElement('div');
         var valor = valorVal.getRawValue();
         var importe = importeVal.getRawValue();
         var plazo = document.getElementById('plazo').value;
         var esquema = document.getElementById('esquema').value;
         var banco = document.getElementById('banco').value;
+        var nombre = document.getElementById('nombre').value;
+        var numero = document.getElementById('numero').value;
+        var correo = document.getElementById('mail').value;
+        var intereses = 0;
+        var interesAnual = 0;
+        var cat = 0;
+        var cpa = 0;
+        var im = 0;
+        var mensualidad = 0;
+        var double = false;
+        var intereses2 = 0;
+        var interesAnual2 = 0;
+        var cat2 = 0;
+        var cpa2 = 0;
+        var im2 = 0;
+        var mensualidad2 = 0;
+        var productName = '';
+        var productName2 = '';
+
+        switch (banco) {
+          case 'HSBC':
+            cat = 11.2;
+            im = 23700;
+            cpa = 15000;
+            interesAnual = 9.7;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Adquisición Pago Fisico';
+            break;
+          case 'Scotiabank':
+            double = true;
+            cat = 11.6;
+            im = 29249;
+            cpa = 18750;
+            interesAnual = 10.6;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Pagos Oportunos';
+            cat2 = 11.5;
+            im2 = 24120;
+            cpa2 = 18750;
+            interesAnual2 = 9.5;
+            intereses2 = interesAnual2 / 100 / 12;
+            var factor2 = Math.pow(1 + intereses2, -plazo * 12);
+            mensualidad2 = importe * (intereses2 / (1 - factor2));
+            mensualidad2 = mensualidad2.toFixed(2);
+            productName2 = 'Valora';
+            break;
+          case 'Santander':
+            cat = 11.6;
+            im = 29949;
+            cpa = 0;
+            interesAnual = 10.3;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Hipoteca Personal';
+            break;
+          case 'Banregio':
+            cat = 12.6;
+            im = 41805;
+            cpa = 27000;
+            interesAnual = 10.1;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Pago Fijo';
+            break;
+          case 'Banorte':
+            double = true;
+            cat = 11.2;
+            im = 30348;
+            cpa = 15000;
+            interesAnual = 9;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Hipoteca Fuerte Optima';
+            cat2 = 10.1;
+            im2 = 28454;
+            cpa2 = 15000;
+            interesAnual2 = 8;
+            intereses2 = interesAnual2 / 100 / 12;
+            var factor2 = Math.pow(1 + intereses2, -plazo * 12);
+            mensualidad2 = importe * (intereses2 / (1 - factor2));
+            mensualidad2 = mensualidad2.toFixed(2);
+            productName2 = 'Hipoteca Fuerte Mínima';
+            break;
+          case 'BX+':
+            cat = 13.2;
+            im = 37944;
+            cpa = 22500;
+            interesAnual = 10.7;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Pago Fijo, Aforo Alto';
+            break;
+          case 'Banamex':
+            cat = 10.5;
+            im = 32550;
+            cpa = 0;
+            interesAnual = 9;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Hipoteca Perfiles';
+            break;
+          case 'Afirme':
+            cat = 12.6;
+            im = 35961;
+            cpa = 0;
+            interesAnual = 10.2;
+            intereses = interesAnual / 100 / 12;
+            var factor = Math.pow(1 + intereses, -plazo * 12);
+            mensualidad = importe * (intereses / (1 - factor));
+            mensualidad = mensualidad.toFixed(2);
+            productName = 'Pago Fijo, Aforo Alto';
+            break;
+          default:
+            return;
+        }
+        if (double) {
+          ct.innerHTML = `<div>  <div class="my-nav">    <img src="https://www.micreditus.com/wp-content/uploads/2022/08/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center my-5" style="color: #000000">    <h4 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h4>  </div>  <div class="mx-5">    <p>${productName}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+            document.getElementById('valor').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
+            document.getElementById('importe').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Plazo del crédito</th>          <td>${plazo} años</td>        </tr>        <tr>          <th scope="row">Tasa de Interés</th>          <td>${interesAnual}%</td>        </tr>        <tr>          <th scope="row">Comisión por apertura</th>          <td>$${separateComma(
+            cpa
+          )}</td>        </tr>        <tr>          <th scope="row">Mensualidad</th>          <td>$${separateComma(
+            mensualidad
+          )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${cat}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
+            im
+          )}</td>        </tr>      </tbody>    </table>    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>    <p style="position: relative; top: 320px; right: -680px; z-index: 999">      1/2    </p>    <p id="pagina2" class="mt-5 pt-5">${productName2}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+            document.getElementById('valor').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
+            document.getElementById('importe').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Plazo del crédito</th>          <td>${plazo} años</td>        </tr>        <tr>          <th scope="row">Tasa de Interés</th>          <td>${interesAnual2}%</td>        </tr>        <tr>          <th scope="row">Comisión por apertura</th>          <td>$${separateComma(
+            cpa2
+          )}</td>        </tr>        <tr>          <th scope="row">Mensualidad</th>          <td>$${separateComma(
+            mensualidad2
+          )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${separateComma(
+            cat2
+          )}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
+            im2
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-5 mb-3">    <img class="logo-alt mt-4" src="https://www.micreditus.com/wp-content/uploads/2022/08/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center" style="margin-top: 2.1rem">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter mb-5">    <p class="mt-2">      MiCreditus | Creditaria - Todos los derechos reservados © 2022    </p>    <p      style="        position: relative;        bottom: 25px;        right: -350px;        color: #212529;        z-index: 999;      "    >      2/2    </p>  </div></div>`;
+        } else {
+          ct.innerHTML = `<div>  <div class="my-nav">    <img src="https://www.micreditus.com/wp-content/uploads/2022/08/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center mt-4 mb-2" style="color: #000000">    <h5 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h5>  </div>  <div class="mx-5">    <p>${productName}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+            document.getElementById('valor').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
+            document.getElementById('importe').value
+          }.00</td>        </tr>        <tr>          <th scope="row">Plazo del crédito</th>          <td>${plazo} años</td>        </tr>        <tr>          <th scope="row">Tasa de Interés</th>          <td>${interesAnual}%</td>        </tr>        <tr>          <th scope="row">Comisión por apertura</th>          <td>$${separateComma(
+            cpa
+          )}</td>        </tr>        <tr>          <th scope="row">Mensualidad</th>          <td>$${separateComma(
+            mensualidad
+          )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${cat}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
+            im
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-4 mb-3">    <img class="logo-alt" src="https://www.micreditus.com/wp-content/uploads/2022/08/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-left mt-1">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter">    MiCreditus | Creditaria - Todos los derechos reservados © 2022    <p      style="        position: relative;        bottom: 10px;        right: -360px;        color: #212529;        z-index: 999;      "    >      1/1    </p>  </div></div>`;
+        }
+      } else {
+        document.getElementById('required-fields2').style.display = 'block';
+      }
+    }
+
+    var ctTodos = document.createElement('div');
+    function calculateAll(bank) {
+      if (
+        document.getElementById('nombre').value &&
+        document.getElementById('numero').value &&
+        document.getElementById('mail').value
+      ) {
+        document.getElementById('paso-2').style.display = 'block';
+        document.getElementById('paso-1').style.display = 'none';
+        document.getElementById('mostrar').style.display = 'block';
+
+        window.scrollTo(0, 0);
+        var meses = [
+          'Enero',
+          'Febrero',
+          'Marzo',
+          'Abril',
+          'Mayo',
+          'Junio',
+          'Julio',
+          'Agosto',
+          'Septiembre',
+          'Octubre',
+          'Noviembre',
+          'Diciembre',
+        ];
+        var currentDate = new Date();
+        var dia = currentDate.getDate();
+        var mes = meses[currentDate.getMonth()];
+        var ano = currentDate.getFullYear();
+        var valor = valorVal.getRawValue();
+        var importe = importeVal.getRawValue();
+        var plazo = document.getElementById('plazo').value;
+        var esquema = document.getElementById('esquema').value;
+        var banco = bank;
         var nombre = document.getElementById('nombre').value;
         var numero = document.getElementById('numero').value;
         var correo = document.getElementById('mail').value;
@@ -425,16 +635,12 @@
             mensualidad = mensualidad.toFixed(2);
             productName = 'Pago Fijo, Aforo Alto';
             break;
+          default:
+            return;
         }
-        var opt = {
-          margin: 1,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 1 },
-          jsPDF: { format: 'a4', orientation: 'p' },
-          enableLinks: true,
-        };
+
         if (double) {
-          ct.innerHTML = `<div>  <div class="my-nav">    <img src="https://www.micreditus.com/wp-content/uploads/2022/08/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center my-5" style="color: #000000">    <h4 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h4>  </div>  <div class="mx-5">    <p>${productName}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+          ctTodos.innerHTML += `<div>  <div class="my-nav">    <img src="https://www.micreditus.com/wp-content/uploads/2022/08/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center my-5" style="color: #000000">    <h4 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h4>  </div>  <div class="mx-5">    <p>${productName}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
             document.getElementById('valor').value
           }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
             document.getElementById('importe').value
@@ -456,17 +662,9 @@
             cat2
           )}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
             im2
-          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-5 mb-3">    <img class="logo-alt mt-4" src="https://www.micreditus.com/wp-content/uploads/2022/08/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center" style="margin-top: 2.1rem">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter mb-5">    <p class="mt-2">      MiCreditus | Creditaria - Todos los derechos reservados © 2022    </p>    <p      style="        position: relative;        bottom: 25px;        right: -350px;        color: #212529;        z-index: 999;      "    >      2/2    </p>  </div></div>`;
-          opt = {
-            pagebreak: { before: '#pagina2' },
-            margin: 1,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 1 },
-            jsPDF: { format: 'a4', orientation: 'p' },
-            enableLinks: true,
-          };
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-5 mb-3">    <img class="logo-alt mt-4" src="https://www.micreditus.com/wp-content/uploads/2022/08/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-center" style="margin-top: 2.1rem">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter mb-5">    <p class="mt-2">      MiCreditus | Creditaria - Todos los derechos reservados © 2022    </p>    <p      style="        position: relative;        bottom: 25px;        right: -350px;        color: #212529;        z-index: 999;      "    >      2/2    </p>  </div></div>`;
         } else {
-          ct.innerHTML = `<div>  <div class="my-nav">    <img src="https://www.micreditus.com/wp-content/uploads/2022/08/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center mt-4 mb-2" style="color: #000000">    <h5 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h5>  </div>  <div class="mx-5">    <p>${productName}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
+          ctTodos.innerHTML += `<div>  <div class="my-nav">    <img src="https://www.micreditus.com/wp-content/uploads/2022/08/logo-cortado.png" alt="Logo" class="logo" />    <p class="mt-3">Mérida, Yucatán. ${dia} de ${mes} del ${ano}</p>  </div>  <div class="text-center mt-4 mb-2" style="color: #000000">    <h5 style="text-transform: uppercase">      ${nombre} ésta es la cotización de ${banco}    </h5>  </div>  <div class="mx-5">    <p>${productName}</p>    <table class="table table-striped table-bordered">      <thead style="background-color: #70e0a0">        <tr>          <th scope="col">Producto</th>          <th scope="col">Pago Fijo</th>        </tr>      </thead>      <tbody>        <tr>          <th scope="row">Valor de vivienda</th>          <td>${
             document.getElementById('valor').value
           }.00</td>        </tr>        <tr>          <th scope="row">Importe del crédito</th>          <td>${
             document.getElementById('importe').value
@@ -476,39 +674,99 @@
             mensualidad
           )}</td>        </tr>        <tr>          <th scope="row">CAT*</th>          <td>${cat}%</td>        </tr>        <tr>          <th scope="row">Ingresos mínimos</th>          <td>$${separateComma(
             im
-          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-4 mb-3">    <img class="logo-alt" src="https://www.micreditus.com/wp-content/uploads/2022/08/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-left mt-1">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter">    MiCreditus | Creditaria - Todos los derechos reservados © 2022    <p      style="        position: relative;        bottom: 10px;        right: -360px;        color: #212529;        z-index: 999;      "    >      1/1    </p>  </div></div>`;
+          )}</td>        </tr>      </tbody>    </table>  </div>  <div style="margin-top: -8px; margin-left: 50px">    <p>      <small        >* La tasa de interes puede disminuir por buen comportamiento de        pago</small      >    </p>  </div>  <div class="text-center mt-4 mb-3">    <img class="logo-alt" src="https://www.micreditus.com/wp-content/uploads/2022/08/rodrigo.png" alt="Asesor" />    <h5><strong>Broker Hipotecario:</strong> Rodrigo Puerto</h5>    <p>      Gracias a tu solicitud, te he enviado un correo con un comparativo de esta      simulación con otras opciones bancarias para que eliljas la que mejor te      funciona a ti.    </p>  </div>  <div class="social-fotter">    <p style="display: inline" class="mr-4">      <img class="social-icon" src="https://www.micreditus.com/wp-content/uploads/2022/08/wp.png" alt="Whatsapp" />(999)      233-0900    </p>    <a      href="mailto:rodrigo@micreditus.com"      style="display: inline; color: #212529"    >      <img        class="social-icon"        src="https://www.micreditus.com/wp-content/uploads/2022/08/mail.png"        alt="email"      />rodrigo@micreditus.com    </a>  </div>  <div class="text-left mt-1">    <p>      <small        >**Esta no es una cotización, sino una simulación aproximada de los        valores solicitados. Ponte en contacto para ayudarte a evaluar todas las        opciones y encontrar la propuesta que mejor se adapte a tus        necesidades</small      >    </p>  </div>  <div class="my-fotter">    MiCreditus | Creditaria - Todos los derechos reservados © 2022    <p      style="        position: relative;        bottom: 10px;        right: -360px;        color: #212529;        z-index: 999;      "    >      1/1    </p>  </div></div>`;
         }
-
-        var worker = html2pdf().set(opt).from(ct);
-
-        worker.outputPdf('blob').then((data) => {
-          document.getElementById('mostrar').style.display = 'none';
-          document.getElementById('final').style.display = 'block';
-          const form = new FormData();
-          form.append('valor', valor);
-          form.append('importe', importe);
-          form.append('plazo', plazo);
-          form.append('banco', banco);
-          form.append('nombre', nombre);
-          form.append('telefono', numero);
-          form.append('correo', correo);
-          form.append('archivo', data, 'Cotizacion.pdf');
-
-          const options = {
-            method: 'POST',
-            body: form,
-          };
-          fetch('https://www.micreditus.com/emailcotizador/', options)
-            .then((response) => response.text())
-            .then((response) => {
-              console.log(response);
-              worker.save('Cotizador');
-            })
-            .catch((err) => console.error(err));
-        });
       } else {
         document.getElementById('required-fields2').style.display = 'block';
       }
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      var valor = valorVal.getRawValue();
+      var importe = importeVal.getRawValue();
+      var plazo = document.getElementById('plazo').value;
+      var esquema = document.getElementById('esquema').value;
+      var banco = document.getElementById('banco').value;
+      var nombre = document.getElementById('nombre').value;
+      var numero = document.getElementById('numero').value;
+      var correo = document.getElementById('mail').value;
+      calculate();
+      var bancos = [
+        'HSBC',
+        'Scotiabank',
+        'Santander',
+        'Banregio',
+        'BX+',
+        'Banamex',
+        'Afirme',
+        'Banorte',
+      ];
+      for (let i = 0; i < bancos.length; i++) {
+        const el = bancos[i];
+        calculateAll(el);
+      }
+      var opt = {
+        pagebreak: { before: '#pagina2', after: '.my-fotter' },
+        margin: 1,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 1 },
+        jsPDF: { format: 'a4', orientation: 'p' },
+        enableLinks: true,
+      };
+      var worker = html2pdf().set(opt).from(ct);
+      var workerAll = html2pdf().set(opt).from(ctTodos);
+
+      worker.outputPdf('blob').then((data) => {
+        console.log(1);
+        const form = new FormData();
+        form.append('valor', valor);
+        form.append('importe', importe);
+        form.append('plazo', plazo);
+        form.append('banco', banco);
+        form.append('nombre', nombre);
+        form.append('telefono', numero);
+        form.append('correo', correo);
+        form.append('archivo', data, 'Cotizacion.pdf');
+
+        const options = {
+          method: 'POST',
+          body: form,
+        };
+        fetch('https://www.micreditus.com/emailcotizador/', options)
+          .then((response) => response.text())
+          .then((response) => {
+            console.log(response);
+            worker.save('Cotizador');
+          })
+          .catch((err) => console.error(err));
+      });
+      workerAll.outputPdf('blob').then((data) => {
+        console.log(2);
+        document.getElementById('mostrar').style.display = 'none';
+        document.getElementById('final').style.display = 'block';
+        const form = new FormData();
+        form.append('valor', valor);
+        form.append('importe', importe);
+        form.append('plazo', plazo);
+        form.append('banco', banco);
+        form.append('nombre', nombre);
+        form.append('telefono', numero);
+        form.append('correo', correo);
+        form.append('archivo', data, 'Cotizaciones.pdf');
+
+        const options = {
+          method: 'POST',
+          body: form,
+        };
+        fetch('https://www.micreditus.com/emailcotizadortodos/', options)
+          .then((response) => response.text())
+          .then((response) => {
+            console.log(response);
+            //workerAll.save('Cotizaciones');
+            //console.log('Guardo2');
+          })
+          .catch((err) => console.error(err));
+      });
     });
   </script>
 </html>
